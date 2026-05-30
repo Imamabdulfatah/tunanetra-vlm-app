@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OpenAIService {
-  // PENTING: Sebaiknya API Key tidak dismpan hardcode di sini, tapi di .env
-  // Namun untuk refactor ini kita ikuti existing code.
-  static const String _apiKey =
-      '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';
+  // Load API key from .env (flutter_dotenv). Do NOT hardcode.
+  String get _apiKey => dotenv.env['OPENAI_API_KEY'] ?? '';
   static const String _baseUrl = 'https://api.openai.com/v1/chat/completions';
 
   Future<String?> describeImage(String base64Image,
